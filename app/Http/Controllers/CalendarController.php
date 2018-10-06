@@ -3,12 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Holiday;
+use App\Calendar;
 
 use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
     //
+    public function index(Request $request)
+    {
+        $cal = new Calendar();
+	$tag = $cal->showCalendarTag($request->month,$request->year);
+        
+        return view('calendar.index', ['cal_tag' => $tag,'year' => $request->year, 'month' => $request->month]);
+    }
+
    public function getHoliday(Request $request)
     {
         // 休日データ取得

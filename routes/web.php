@@ -11,5 +11,6 @@
 |
 */
 
+Route::get('/','CalendarController@index');
 Route::get('/holiday','CalendarController@getHoliday');
 Route::post('/holiday','CalendarController@postHoliday');

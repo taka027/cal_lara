@@ -2,6 +2,7 @@
 @section('title', '休日設定')
 @section('content')
     <h1>休日</h1>
+<a href="{{ url('/') }}">カレンダーに戻る</a>
     <form method="POST" action="/holiday"> 
     <div class="form-group">
     {{csrf_field()}}    <label for="day">日付[YYYY/MM/DD] </label><input type="text" name="day" class="form-control" id="day">
