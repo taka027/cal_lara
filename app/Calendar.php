@@ -2,7 +2,11 @@
 namespace App;
 class Calendar
 {
+    private $holidays;
     private $html;    
+    function __construct($holidays) {
+        $this->holidays = $holidays;
+    }
     public function showCalendarTag($m, $y)
     {
         $year = $y;
@@ -18,7 +22,7 @@ class Calendar
         $day = 1 - $firstWeekDay;
         $this->html = <<< EOS
 <h1>{$year}年{$month}月</h1>
-<table class="table table-bordered">
+<table class="table table-bordered" style="table-layout:fixed;">
 <tr>
   <th scope="col">日</th>
   <th scope="col">月</th>
@@ -38,7 +42,15 @@ EOS;
                     // 先月・来月の日付の場合
                     $this->html .= "<td>&nbsp;</td>";
                 } else {
-                   $this->html .= "<td>" . $day . "</td>"; 
+                   $this->html .= "<td>" . $day ."&nbsp"; 
+                   $target = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year)); 
+                   foreach($this->holidays as $val) {
+		       if ($val->day == $target) {
+                           $this->html .= $val->description; 
+			   break;
+		       }
+		   }
+                   $this->html .= "</td>"; 
                 }
                $day++;
             }
