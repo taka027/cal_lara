@@ -1,29 +1,39 @@
-<html>
-<head>
-    <title>休日データ</title>
-</head>
-<body>
+@extends('layout')
+@section('title', '休日設定')
+@section('content')
     <h1>休日</h1>
     <form method="POST" action="/holiday"> 
-    {{csrf_field()}}    日付: <input type="text" name="day"> [YYYY/MM/DD]
-    説明: <input type="text" name="description"> 
-    <input type="submit"> 
+    <div class="form-group">
+    {{csrf_field()}}    <label for="day">日付[YYYY/MM/DD] </label><input type="text" name="day" class="form-control" id="day">
+    <label for="description">説明</label><input type="text" name="description" class="form-control" id="description"> 
+    </div>
+    <button type="submit" class="btn btn-primary">登録</button> 
     </form> 
-    <table>
+    <table class="table">
+    <thead>
     <tr>
-   <th>日付</th>
-    <th>説明</th>
-   <th>作成日</th>
-    <th>更新日</th>
+   <th scope="col">日付</th>
+    <th scope="col">説明</th>
+   <th scope="col">作成日</th>
+    <th scope="col">更新日</th>
     </tr>
+    </thead>
+    <tbody>
     @foreach($list as $val)
     <tr>
-       <td>{{$val->day}}</td>
+       <th scope="row">{{$val->day}}</th>
         <td>{{$val->description}}</td>
        <td>{{$val->created_at}}</td>
         <td>{{$val->updated_at}}</td>
     </tr>
     @endforeach
+    </tbody>
     </table>
-</body>
-</html>
+
+<script>
+  $( function() {
+    $( "#day" ).datepicker(
+{dateFormat: 'yy/mm/dd'});
+  } );
+</script>
+@endsection
