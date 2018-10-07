@@ -11,6 +11,15 @@
     <button type="submit" class="btn btn-primary">登録</button> 
     <input type="hidden" name="id" value="{{$data->id}}">
     </form> 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <table class="table">
     <thead>
     <tr>
@@ -42,7 +51,7 @@
 <script>
   $( function() {
     $( "#day" ).datepicker(
-{dateFormat: 'yy/mm/dd'});
+{dateFormat: 'yy-mm-dd'});
   } );
 </script>
 @endsection
