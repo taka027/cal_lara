@@ -18,6 +18,7 @@
     <th scope="col">説明</th>
    <th scope="col">作成日</th>
     <th scope="col">更新日</th>
+    <th scope="col">削除</th>
     </tr>
     </thead>
     <tbody>
@@ -27,6 +28,12 @@
         <td>{{$val->description}}</td>
        <td>{{$val->created_at}}</td>
         <td>{{$val->updated_at}}</td>
+        <td><form action="/holiday" method="post">
+{{csrf_field()}} 
+            <input type="hidden" name="id" value="{{$val->id}}">
+            {{ method_field('delete') }}
+            <button class="btn btn-default" type="submit">Delete</button>
+        </form></td>
     </tr>
     @endforeach
     </tbody>
