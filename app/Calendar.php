@@ -57,11 +57,11 @@ EOS;
                    $this->html .= "<td>" . $day ."&nbsp"; 
                    $target = date("Y-m-d", mktime(0, 0, 0, $month, $day, $year)); 
                    foreach($this->holidays as $val) {
-		       if ($val->day == $target) {
-                           $this->html .= $val->description; 
-			   break;
-		       }
-		   }
+                        if ($val->day == $target) {
+                            $this->html .= e($val->description); 
+                            break;
+                        }
+                    }
                    $this->html .= "</td>"; 
                 }
                $day++;
@@ -69,7 +69,7 @@ EOS;
             
             $this->html .= "</tr>";
         }
-        
-        return $this->html .= '</table>';
+        $this->html .= '</table>';
+        return $this->html;
     }
 }
